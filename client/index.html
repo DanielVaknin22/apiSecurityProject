@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
@@ -19,11 +20,81 @@
       <p>Secure Data: <span id="secureData"></span></p>
     </div>
 
-    <div class="logout-group">
-      <button onclick="logout()">Logout</button>
+    <div id="performance-metrics">
+      <h2>API Response Time</h2>
+      <canvas id="responseTimeChart"></canvas>
+    </div>
+
+    <div id="security-test-results">
+      <h2>Authentication Success Rate</h2>
+      <canvas id="authSuccessChart"></canvas>
+    </div>
+
+    <div id="rateLimitingImpact">
+      <h2>Number of Requests per Minute</h2>
+      <canvas id="requestsChart"></canvas>
     </div>
   </div>
 
   <script src="index.js"></script>
+  <script>
+    const ctx = document.getElementById('responseTimeChart').getContext('2d');
+    const responseTimeChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Request 1', 'Request 2', 'Request 3', 'Request 4', 'Request 5'],
+        datasets: [{
+          label: 'Response Time (ms)',
+          data: [120, 150, 200, 170, 180],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const ctx2 = document.getElementById('authSuccessChart').getContext('2d');
+    const authSuccessChart = new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Success', 'Failure'],
+        datasets: [{
+          data: [85, 15],
+          backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+          borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+          borderWidth: 1
+        }]
+      }
+    });
+
+    // Rate Limiting Impact Chart
+    const ctx3 = document.getElementById('requestsChart').getContext('2d');
+    const requestsChart = new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['Minute 1', 'Minute 2', 'Minute 3', 'Minute 4', 'Minute 5'],
+        datasets: [{
+          label: 'Requests',
+          data: [50, 60, 55, 70, 65],
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+          borderColor: 'rgba(153, 102, 255, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 170vh;
   }
   
   .container {
@@ -17,6 +17,7 @@ body {
     max-width: 400px;
     width: 100%;
     text-align: center;
+    min-height: 1000px;
   }
   
   h1 {
